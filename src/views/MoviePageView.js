@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
-import FilmInfo from "../component/FilmInfo/FilmInfo";
+import { withRouter } from "react-router-dom";
+
+import { lazy, Suspense } from "react";
+
+const FilmInfo = lazy(() => import("../component/FilmInfo/FilmInfo"));
 
 class MoviePageView extends Component {
   state = {
@@ -8,8 +12,6 @@ class MoviePageView extends Component {
     filmGenres: [],
     filmTitle: "",
     filmPoster: "",
-    filmActors: [],
-    filmReviews: [],
   };
 
   async componentDidMount() {
@@ -20,18 +22,6 @@ class MoviePageView extends Component {
       .get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`)
       .then((response) => response.data)
       .then((data) => data);
-    console.log(data);
-    const actors = await axios
-      .get(
-        `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${apiKey}&language=en-US`
-      )
-      .then((response) => response.data.cast);
-
-    const reviews = await axios
-      .get(
-        `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=${apiKey}&language=en-US&page=1`
-      )
-      .then((response) => response.data.results);
 
     await this.setState({
       filmId: data.id,
@@ -40,27 +30,36 @@ class MoviePageView extends Component {
       filmUserScore: data.vote_average,
       filmOverview: data.overview,
       filmPoster: data.poster_path,
-      filmActors: [...actors],
-      filmReviews: [...reviews],
     });
   }
-  handleGoBack = () => {
-    this.props.history.push(this.props.location.state.from);
+  handleGoBack = (props) => {
+    const { state } = this.props.location;
+    if (this.props.location.state.query !== undefined) {
+      this.props.history.push({
+        pathname: "/movies",
+        state: { query: props.location.state.query },
+      });
+    } else if (state) {
+      this.props.history.push({
+        pathname: "/",
+      });
+    }
   };
   render() {
-    console.log(this.props.match);
     return (
       <>
-        <FilmInfo
-          dataFilm={this.state}
-          fn={this.handleGoBack}
-          {...this.props}
-        />
+        <Suspense fallback={<div>Loading...</div>}>
+          <FilmInfo
+            dataFilm={this.state}
+            fn={this.handleGoBack}
+            {...this.props}
+          />
+        </Suspense>
       </>
     );
   }
 }
 
-export default MoviePageView;
+export default withRouter(MoviePageView);
 
 //<Trending apiKey="5582cdfb391f31d3df38371c508e509b" />;

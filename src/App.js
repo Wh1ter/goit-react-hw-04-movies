@@ -1,44 +1,46 @@
-import axios from "axios";
 import { Route, Switch } from "react-router";
 import { NavLink } from "react-router-dom";
-import Trending from "./component/Trending/Trending";
-import HomeView from "./views/HomeView";
-import MoviesView from "./views/MoviesView";
-import NotFoundView from "./views/NotFoundView";
-import MoviePageView from "./views/MoviePageView";
-import Actors from "./component/Actors/Actors";
+import React, { lazy, Suspense } from "react";
+import routes from "./routes";
+import style from "./styles/app.module.css";
 
-const apiKey = "5582cdfb391f31d3df38371c508e509b";
+const HomeView = lazy(() => import("./views/HomeView"));
+const MoviesView = lazy(() => import("./views/MoviesView"));
+const NotFoundView = lazy(() => import("./views/NotFoundView"));
+const MoviePageView = lazy(() => import("./views/MoviePageView"));
 
 function App() {
   return (
-    <div className="App">
-      <nav>
-        <li>
-          <NavLink to="/" className="navlink" activeClassName="navlink--axtive">
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/movies"
-            className="navlink"
-            activeClassName="navlink--axtive"
-          >
-            Movies
-          </NavLink>
-        </li>
-      </nav>
-      <Switch>
-        <Route exact path="/" component={HomeView} />
-        <Route
-          path="/movies/:movieId"
-          render={(props) => <MoviePageView {...props} />}
-        />
-
-        <Route exact path="/movies" component={MoviesView} />
-        <Route component={NotFoundView} />
-      </Switch>
+    <div className={style.app}>
+      <Suspense fallback={<div>Loading...</div>}>
+        <nav>
+          <li className={style.navItems}>
+            <NavLink
+              to={routes.home}
+              className="navlink"
+              activeClassName="navlink--axtive"
+            >
+              Home
+            </NavLink>
+          </li>
+          <li className={style.navItems}>
+            <NavLink
+              to={routes.movies}
+              className="navlink"
+              activeClassName="navlink--active"
+            >
+              Movies
+            </NavLink>
+          </li>
+        </nav>
+        <hr />
+        <Switch>
+          <Route exact path={routes.home} component={HomeView} />
+          <Route exact path={routes.movies} component={MoviesView} />
+          <Route path={routes.film} render={() => <MoviePageView />} />
+          <Route component={NotFoundView} />
+        </Switch>
+      </Suspense>
     </div>
   );
 }
