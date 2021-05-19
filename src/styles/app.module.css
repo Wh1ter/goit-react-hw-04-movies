@@ -35,6 +35,7 @@ body {
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
+  background-color: #32325fa2;
 }
 
 /* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
@@ -99,9 +100,9 @@ nav > li > a {
 }
 nav > li > a:hover {
   background-color: #d6d6dba2;
-  color: #ca2b60;
-  border-bottom: #ca2b60 solid 4px;
+  color: #da1313;
+  border-bottom: #da1313 solid 4px;
 }
 .navlink--active {
-  color: #4169e1;
+  color: #547df5;
 }

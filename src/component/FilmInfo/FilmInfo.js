@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-// import Cast from "../Cast/Cast";
 import { Route } from "react-router";
 import { Link, withRouter } from "react-router-dom";
 import MovieDetailsPage from "../../views/MovieDetailsPage";
+// import Cast from "../Cast/Cast";
+
+// const Cast == Cast
 
 class FilmInfo extends Component {
   state = {};

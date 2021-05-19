@@ -1,29 +1,30 @@
 .film_info {
-    display: flex;
-    flex-direction: row;
-    margin: 15px;
-  }
-  button {
-    margin: auto auto auto 20px;
-  }
-  button:hover {
-    background-color: #ff00ff11;
-    border: #b42828 solid 1px;
-  }
-  .film_poster > img {
-    max-width: 220px;
-  }
-  .film_details {
-    margin-left: 20px;
-  }
-  li {
-    list-style-type: none;
-  }
-  a {
-    display: block;
-    width: max-content;
-    text-decoration: none;
-  }
-  a:hover {
-    border-bottom: solid 3px #fc1b1b;
-  }
+  display: flex;
+  flex-direction: row;
+  margin: 15px;
+}
+button {
+  margin: auto auto auto 20px;
+  color: #32325fa2;
+}
+button:hover {
+  background-color: #16148d;
+  border: #1a04e7 solid 1px;
+}
+.film_poster > img {
+  max-width: 220px;
+}
+.film_details {
+  margin-left: 20px;
+}
+li {
+  list-style-type: none;
+}
+a {
+  display: block;
+  width: max-content;
+  text-decoration: none;
+}
+a:hover {
+  border-bottom: solid 3px #1a04e7;
+}

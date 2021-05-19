@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import style from "../../styles/FilmInfo.module.css";
 
 const MovieDetailsPage = lazy(() => import("../../views/MovieDetailsPage"));
-//import MovieDetailsPage from "../../views/MovieDetailsPage";
 
 class FilmInfo extends Component {
   state = {};
