@@ -1,4 +1,3 @@
-  
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
@@ -37,7 +36,7 @@ class MoviesView extends Component {
   };
 
   search(w) {
-    const apiKey = "140aa2a61156d040b45d8a45da490f38";
+    const apiKey = "5582cdfb391f31d3df38371c508e509b";
 
     let arr = axios
       .get(
